@@ -1,10 +1,15 @@
 <?php
 require_once __DIR__ . '/function.php';
 
+session_start();
+
     if(!empty($_GET['pass-lenght'])){
         $pass_lenght= intval($_GET['pass-lenght']) ? intval($_GET['pass-lenght']) : rand(10,13);
         $password= generatePassword($_GET['pass-lenght']);
         echo $password;
+        $_SESSION['password']=$password;
+        header('Location: ./response.php');
+        die();
     }
 ?>
 
@@ -18,10 +23,10 @@ require_once __DIR__ . '/function.php';
     <title>Password generator</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container p-5">
         <div class="row">
             <div class="col">
-                <form action="session.php" method="GET">
+                <form action="index.php" method="GET">
                     <input type="number" name="pass-lenght">
                     <button>Genera password</button>
                 </form>
