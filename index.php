@@ -1,6 +1,19 @@
 <?php
-
+    function generatePassword($lenght){
+        $password='';
+        for($i=0; $i<$lenght; $i++){
+            $password .= chr(rand(35,122));
+        }
+        return $password;
+    }
+    if(!empty($_GET['pass-lenght'])){
+        $pass_lenght= intval($_GET['pass-lenght']) ? intval($_GET['pass-lenght']) : rand(10,13);
+        echo $pass_lenght;
+        $password= generatePassword($_GET['pass-lenght']);
+        echo $password;
+    }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +24,15 @@
     <title>Password generator</title>
 </head>
 <body>
-    
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <form action="index.php" method="GET">
+                    <input type="number" name="pass-lenght">
+                    <button>Genera password</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
